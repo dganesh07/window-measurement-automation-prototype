@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Strata52 — ABC Windows Field Measurement Automation</title>
+<style>
+  @page { size: Letter; margin: 0.75in; }
+  * { box-sizing: border-box; }
+  html, body {
+    background: #ffffff;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: #1c1c1e;
+    line-height: 1.55;
+    font-size: 10.5pt;
+    max-width: 100%;
+    margin: 0;
+  }
+  h1 {
+    font-size: 20pt;
+    margin: 0 0 2px;
+    letter-spacing: -0.3px;
+  }
+  h2.subtitle {
+    font-size: 12pt;
+    font-weight: 500;
+    color: #555;
+    margin: 0 0 18px;
+  }
+  .hook {
+    font-size: 12.5pt;
+    font-weight: 700;
+    margin: 14px 0;
+    padding: 10px 14px;
+    background: #f4f4f6;
+    border-left: 3px solid #1a1a1a;
+  }
+  h3 {
+    font-size: 12.5pt;
+    margin: 22px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid #1a1a1a;
+    break-after: avoid;
+  }
+  p { margin: 8px 0; }
+  strong { font-weight: 700; }
+  ul { margin: 6px 0; padding-left: 20px; }
+  li { margin: 3px 0; }
+  hr { display: none; }
+
+  .diagram {
+    font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+    font-size: 8.5pt;
+    line-height: 1.5;
+    background: #f7f7f8;
+    border: 1px solid #e2e2e5;
+    border-radius: 6px;
+    padding: 12px 14px;
+    white-space: pre;
+    overflow-x: auto;
+    margin: 8px 0;
+    break-inside: avoid;
+  }
+  .diagram-label {
+    font-weight: 700;
+    font-size: 9.5pt;
+    margin: 10px 0 2px;
+  }
+  .states {
+    font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+    font-size: 8.5pt;
+    background: #f7f7f8;
+    border: 1px solid #e2e2e5;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 6px 0 10px;
+  }
+
+  .slot {
+    border: 1.5px dashed #9a6b00;
+    background: #fff8e6;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    break-inside: avoid;
+  }
+  .slot .slot-title {
+    font-weight: 700;
+    font-size: 11.5pt;
+  }
+  .slot .slot-note {
+    font-size: 9pt;
+    color: #6b5200;
+    margin-top: 4px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 14px;
+    font-size: 9.5pt;
+    break-inside: avoid;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 6px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #f2f2f4;
+    font-weight: 700;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .check { color: #1a7a3c; font-weight: 700; }
+  .cross { color: #a12622; font-weight: 700; }
+
+  section { break-inside: avoid-page; }
+</style>
+</head>
+<body>
+
+<h1>Strata52</h1>
+<h2 class="subtitle">ABC Windows — Field Measurement Automation</h2>
+
+<div class="hook">Bad data physically cannot leave the job site.</div>
+
+<p>The problem isn't paper. It's that incomplete or ambiguous measurements
+are discovered only after the technician has already left. I propose a
+guided, validated measurement workflow that catches problems at the
+source, gives the manager an exception queue instead of a re-entry job,
+and pushes approved, structured data straight into production, inventory,
+and billing.</p>
+
+<p>To prove the approach rather than just describe it, I built a working
+prototype — technician capture app and manager dashboard, running
+end-to-end against a real backend.</p>
+
+<h3>Workflow: Before → After</h3>
+
+<div class="diagram-label">Today:</div>
+<div class="diagram">Job assigned → Tech visits site → Measures on paper → Transcribes form
+later → Manager reviews → Missing info?
+   Yes → Clarification / second trip     No → Manager re-enters order
+                                                       ↓
+                                    Production + inventory + billing</div>
+<p>Information is validated too late; paper notes are unstructured and
+sometimes illegible; techs rely on memory transcribing later; managers
+manually re-key everything; missing measurements cause expensive second
+visits; errors propagate downstream.</p>
+
+<div class="diagram-label">Proposed:</div>
+<div class="diagram">Job assigned → Dynamic checklist generated → Tech captures measurements,
+photos, notes → Validated live, on-device → Exceptions resolved before
+leaving → Manager reviews structured submission → Approved, or
+clarification requested → Sent to production, inventory, billing</div>
+<div class="states"><strong>States:</strong> Assigned → In Progress → Submitted → Needs Clarification
+(loops back to Submitted) → Approved → Production → Completed</div>
+
+<p>If a job type has no configured measurement template, the system doesn't
+invent one — it routes for manual configuration rather than guessing.</p>
+
+<div class="slot">
+  <div class="slot-title">🎥 [ADD DEMO VIDEO LINK HERE]</div>
+  <div class="slot-note">2–3 min walkthrough: tech submits a complete job → tries an incomplete
+  one, blocked → enters an unusual measurement, flagged live → manager
+  approves a clean one → billing queue updates → one clarification
+  round-trip.</div>
+</div>
+
+<div class="slot">
+  <div class="slot-title">💻 [ADD REPO LINK HERE]</div>
+  <div class="slot-note">Push to GitHub and link it here — a reviewer evaluating a
+  build-focused hire will want to open the code, not just watch the demo.</div>
+</div>
+
+<h3>Validation Model</h3>
+<p>Three different responses to "this might be wrong" — not all validation
+treated the same way:</p>
+<table>
+  <tr><th>Type</th><th>Example</th><th>Behavior</th></tr>
+  <tr><td><strong>Hard-required</strong></td><td>Missing width, missing window type</td><td>Blocks submission — can never be missing</td></tr>
+  <tr><td><strong>Warn + confirm</strong></td><td>Width entered as 5"</td><td>Flagged live as the tech types; corrected, or explicitly confirmed — never a silent gap</td></tr>
+  <tr><td><strong>Nudge, not block</strong></td><td>No photo or notes</td><td>One-time, non-blocking prompt before submit — forcing uploads mid-visit isn't worth the friction</td></tr>
+</table>
+<p>A technician can also flag any window "not confident," routing it into
+the manager's exception queue directly — for the cases no algorithm
+catches.</p>
+
+<h3>Tech Stack</h3>
+<p><strong>Prototype stack</strong>: optimized for speed and demonstrating behavior.
+<strong>Production stack</strong>: selected after discovering ABC's identity, device
+environment, ERP, accounting, connectivity, security, and integration
+constraints.</p>
+<p>What doesn't change regardless of which client this is: a shared backend
+is not optional — a client-only app can't make the tech→manager→billing
+handoff exist at all. Concretely: mobile-first PWA for capture (no
+app-store step, offline-capable); same app, desktop-responsive, for the
+manager; a backend API owning the source of truth; a real relational
+database (the prototype's flat JSON files are a demo shortcut, not a
+production plan); object storage for photos; and an API/webhook layer
+into ABC's existing ERP — an integration point, not a replacement.</p>
+<p>Vendor choices (cloud, database, auth provider) should follow ABC's
+existing stack. Absent that information, the default is Node/Express +
+React + Postgres — boring, well-supported, not a locked-in recommendation.</p>
+
+<h3>MVP vs. MVP+</h3>
+<p><strong>MVP:</strong> job list, guided per-window measurements, dynamic required
+fields, unit and plausible-range validation, optional photographs with a
+non-blocking nudge, manager review screen, clarification request,
+approval and structured downstream handoff, timestamped audit trail.</p>
+<p><strong>MVP+ (explicitly deferred):</strong></p>
+<ul>
+  <li>Offline-first PWA sync, and CV-assisted measurement from photos
+  (shown <em>alongside</em> manual entry as a cross-check, not a replacement —
+  needs a calibration reference in-frame to be accurate) — both
+  general technical patterns, ready to design without more input from ABC.</li>
+  <li>Voice notes converted to structured notes, fully autonomous approval,
+  and inventory optimization — depend on decisions or systems that belong
+  to ABC (see Open Questions), not on build time.</li>
+</ul>
+
+<h3>Configurability</h3>
+<table>
+  <tr><th>Principle</th><th>Status</th></tr>
+  <tr><td>Selecting a job loads its known info</td><td><span class="check">✅ Built</span></td></tr>
+  <tr><td>Window type changes the required checklist</td><td><span class="cross">❌ Not built</span> — one fixed checklist today</td></tr>
+  <tr><td>Different rules attached to different fields</td><td><span class="check">✅ Built</span>, but hardcoded, not configurable per job</td></tr>
+  <tr><td>Required vs. suspicious info behave differently</td><td><span class="check">✅ Built</span> — the validation model above</td></tr>
+</table>
+<p>The real gap: checklist rules should vary by <em>both</em> job type and window
+type, not use one default set. The architecture already supports this
+(job metadata already flows into the form) — an extension, not a redesign.</p>
+
+<h3>What I Decided vs. What I Left Open</h3>
+<p><strong>Decided:</strong> manager approval is always required, flagged or not — whether
+a clean submission could someday skip that step is ABC's call, not
+assumed here. No authentication in the prototype — a real gap, named
+rather than hidden.</p>
+<p><strong>Left open, for discovery with ABC:</strong></p>
+<ul>
+  <li>What measurement fields are required today, and do they differ by window type or job type?</li>
+  <li>What system receives the production/inventory/billing order today — does it expose an API, or is it re-keyed by hand?</li>
+  <li>What devices do technicians carry, and what's typical site connectivity?</li>
+  <li>What's the current second-trip rate, and what does one actually cost?</li>
+  <li>Who should be able to override a flagged measurement — tech, manager, or both?</li>
+  <li>What are ABC's real authentication and security requirements for a field crew?</li>
+</ul>
+
+<h3>Success Metrics</h3>
+<p>Targets must be evaluated against baseline metrics: technician
+administrative time per job, manager review time per job, first-pass
+completeness rate, percentage of jobs requiring clarification, repeat
+site-visit rate, time from site visit to approval, manual data-entry
+time, production errors caused by incorrect measurements.</p>
+<p>Illustrative targets, clearly labeled as hypotheses:</p>
+<ul>
+  <li>Reduce technician transcription from 20 minutes to under 2 minutes</li>
+  <li>Raise first-pass completeness above 95%</li>
+  <li>Reduce approval latency from the following day to minutes</li>
+  <li>Reduce measurement-related repeat visits by 70–80%</li>
+</ul>
+
+<h3>What's Real vs. Mocked</h3>
+<table>
+  <tr><th></th><th>Real</th><th>Mocked</th></tr>
+  <tr><td>Capture form, validation, exception queue, clarification loop</td><td class="check">✅</td><td></td></tr>
+  <tr><td>Approve → downstream handoff</td><td class="check">✅ (structured payload)</td><td>Destination is a mock queue, not ABC's real ERP</td></tr>
+  <tr><td>Job metadata</td><td></td><td>Stands in for ABC's scheduling/CRM</td></tr>
+  <tr><td>Storage</td><td></td><td>Flat files here — a real deployment uses a database</td></tr>
+</table>
+
+</body>
+</html>

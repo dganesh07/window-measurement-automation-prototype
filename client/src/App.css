@@ -1,0 +1,407 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f4f5f7;
+  color: #1a1a1a;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.app-header h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.app-header nav button {
+  margin-left: 8px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+.app-header nav button.active {
+  background: #1a1a1a;
+  color: white;
+  border-color: #1a1a1a;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 12px 0 4px;
+  color: #444;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+textarea {
+  min-height: 60px;
+}
+
+.dims {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.window-block {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 14px;
+  margin: 16px 0;
+}
+
+.window-block legend {
+  font-weight: 700;
+  padding: 0 6px;
+}
+
+button {
+  font-family: inherit;
+}
+
+button.primary {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  background: #1a6cf0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.primary:disabled {
+  background: #9db8e8;
+}
+
+button.remove-window {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #c0392b;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+.job-meta {
+  background: #f7f8fa;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.errors {
+  background: #fdecea;
+  border: 1px solid #f5c6cb;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-top: 14px;
+  color: #a12622;
+  font-size: 0.85rem;
+}
+
+.errors ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.flags {
+  background: #fff8e1;
+  border: 1px solid #ffe08a;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 12px 0;
+  font-size: 0.85rem;
+}
+
+.flags ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
+
+.photo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.photo-thumb {
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.photo-thumb button {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: #c0392b;
+  color: white;
+  font-size: 0.7rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.thumb {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.confirmation h2 {
+  margin-top: 0;
+}
+
+.submission {
+  border: 1px solid #e0e0e0;
+}
+
+.submission.flagged {
+  border-color: #ffb020;
+}
+
+.submission-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #eee;
+  white-space: nowrap;
+}
+
+.badge.pending_review {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.badge.sent_to_billing {
+  background: #d4edda;
+  color: #155724;
+}
+
+.badge.needs_clarification {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.badge.uncertain {
+  margin-left: 6px;
+  background: #e2d9f3;
+  color: #4b3b7a;
+}
+
+.range-warning {
+  background: #fff3e0;
+  border: 1px solid #ffcc80;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #8a4b00;
+}
+
+.submit-nudge {
+  color: #666;
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  margin: 12px 0 0;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.checkbox-label input {
+  width: auto;
+}
+
+.uncertain-toggle {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px dashed #e0e0e0;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #1a6cf0;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.8rem;
+  margin-top: 6px;
+}
+
+.clarification-queue {
+  border: 1px solid #f5c6cb;
+  background: #fff8f8;
+}
+
+.clarification-item {
+  border-top: 1px solid #f0d9db;
+  padding: 10px 0;
+}
+
+.clarification-item:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.clarification-item button {
+  margin-top: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #c0392b;
+  background: white;
+  color: #c0392b;
+  cursor: pointer;
+}
+
+.clarification-history {
+  margin-top: 8px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.card-actions button.primary {
+  margin-top: 0;
+  flex: 1;
+}
+
+button.secondary {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.clarification-form {
+  margin-top: 12px;
+}
+
+.window-summaries {
+  margin-top: 10px;
+}
+
+.window-summary {
+  border-top: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.muted {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.downstream-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+.downstream-table th,
+.downstream-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.downstream-table th {
+  color: #777;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.audit-trail {
+  margin-top: 10px;
+  font-size: 0.8rem;
+}
+
+.audit-trail summary {
+  color: #777;
+  cursor: pointer;
+}
+
+.audit-trail ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: #555;
+}
+
+section h3 {
+  margin-bottom: 8px;
+}

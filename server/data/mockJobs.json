@@ -1,0 +1,16 @@
+[
+  {
+    "jobId": "JOB-1042",
+    "customerName": "Marcus Feld",
+    "siteAddress": "214 Birchwood Ln, Nashua, NH",
+    "techName": "Dana Ruiz",
+    "scheduledDate": "2026-08-17"
+  },
+  {
+    "jobId": "JOB-1043",
+    "customerName": "Ortega Residence",
+    "siteAddress": "88 Quarry Rd, Manchester, NH",
+    "techName": "Jamal Whitfield",
+    "scheduledDate": "2026-08-18"
+  }
+]
