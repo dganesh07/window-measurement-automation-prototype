@@ -3,7 +3,7 @@
 Technician capture app + manager review dashboard, built for the ABC
 Windows measurement case. The full business write-up (problem, workflow,
 tech stack rationale, open questions, success metrics) is in
-`writeup.pdf` / `writeup.md` — this README covers the code.
+`writeup.pdf` (source: `writeup.html`) — this README covers the code.
 
 ## Run it
 

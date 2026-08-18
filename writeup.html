@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Strata52 — ABC Windows Field Measurement Automation</title>
+<title>Strata52: ABC Windows Field Measurement Automation</title>
 <style>
   @page { size: Letter; margin: 0.75in; }
   * { box-sizing: border-box; }
@@ -124,44 +124,52 @@
 <body>
 
 <h1>Strata52</h1>
-<h2 class="subtitle">ABC Windows — Field Measurement Automation</h2>
+<h2 class="subtitle">ABC Windows: Field Measurement Automation</h2>
 
-<div class="hook">Bad data physically cannot leave the job site.</div>
+<div class="hook">Bad data physically should not leave the job site.</div>
 
-<p>The problem isn't paper. It's that incomplete or ambiguous measurements
-are discovered only after the technician has already left. I propose a
-guided, validated measurement workflow that catches problems at the
-source, gives the manager an exception queue instead of a re-entry job,
-and pushes approved, structured data straight into production, inventory,
-and billing.</p>
+<p>The core problem isn't paper. It's that technicians don't always know
+exactly what a job requires before they start measuring, and gaps or
+errors in what they capture are only discovered after they've already
+left. I propose a guided, checklist-driven capture flow: the app tells
+the technician what this specific job needs, validates measurements and
+prompts for supporting detail — photos, notes — live at the point of
+capture, and gives the manager an exception queue instead of a blind
+check of every field.</p>
 
 <p>To prove the approach rather than just describe it, I built a working
-prototype — technician capture app and manager dashboard, running
+prototype: technician capture app and manager dashboard, running
 end-to-end against a real backend.</p>
 
 <h3>Workflow: Before → After</h3>
 
 <div class="diagram-label">Today:</div>
-<div class="diagram">Job assigned → Tech visits site → Measures on paper → Transcribes form
-later → Manager reviews → Missing info?
-   Yes → Clarification / second trip     No → Manager re-enters order
-                                                       ↓
-                                    Production + inventory + billing</div>
-<p>Information is validated too late; paper notes are unstructured and
-sometimes illegible; techs rely on memory transcribing later; managers
-manually re-key everything; missing measurements cause expensive second
-visits; errors propagate downstream.</p>
+<div class="diagram">
+Job assigned → Tech visits site → Measures on paper
+→ Transcribes form later → Manager reviews → Missing info?
+Yes → Clarification / second trip
+No → Sent to billing → Production + inventory + billing</div>
+
+<p>
+Information is validated too late;
+Paper notes are unstructured and sometimes illegible;
+Techs rely on memory transcribing later;
+Missing measurements cause expensive second visits; 
+Errors propagate downstream.</p>
 
 <div class="diagram-label">Proposed:</div>
-<div class="diagram">Job assigned → Dynamic checklist generated → Tech captures measurements,
-photos, notes → Validated live, on-device → Exceptions resolved before
-leaving → Manager reviews structured submission → Approved, or
-clarification requested → Sent to production, inventory, billing</div>
+<div class="diagram">
+Job assigned → Dynamic checklist generated → Tech captures measurements, photos, notes
+→ Validated live, on-device → Exceptions resolved before leaving
+→ Manager reviews structured submission 
+→ Approved, or clarification requested 
+→ Sent to production, inventory, billing</div>
+
 <div class="states"><strong>States:</strong> Assigned → In Progress → Submitted → Needs Clarification
 (loops back to Submitted) → Approved → Production → Completed</div>
 
 <p>If a job type has no configured measurement template, the system doesn't
-invent one — it routes for manual configuration rather than guessing.</p>
+invent one. It routes for manual configuration rather than guessing.</p>
 
 <div class="slot">
   <div class="slot-title">🎥 [ADD DEMO VIDEO LINK HERE]</div>
@@ -173,36 +181,38 @@ invent one — it routes for manual configuration rather than guessing.</p>
 
 <div class="slot">
   <div class="slot-title">💻 [ADD REPO LINK HERE]</div>
-  <div class="slot-note">Push to GitHub and link it here — a reviewer evaluating a
-  build-focused hire will want to open the code, not just watch the demo.</div>
 </div>
 
+<p><em>Runs against mocked job data and a mocked downstream queue, not
+live ABC systems.</em></p>
+
 <h3>Validation Model</h3>
-<p>Three different responses to "this might be wrong" — not all validation
-treated the same way:</p>
+<p>Not all validation treated the same way:</p>
 <table>
   <tr><th>Type</th><th>Example</th><th>Behavior</th></tr>
-  <tr><td><strong>Hard-required</strong></td><td>Missing width, missing window type</td><td>Blocks submission — can never be missing</td></tr>
-  <tr><td><strong>Warn + confirm</strong></td><td>Width entered as 5"</td><td>Flagged live as the tech types; corrected, or explicitly confirmed — never a silent gap</td></tr>
-  <tr><td><strong>Nudge, not block</strong></td><td>No photo or notes</td><td>One-time, non-blocking prompt before submit — forcing uploads mid-visit isn't worth the friction</td></tr>
+  <tr><td><strong>Hard-required</strong></td><td>Missing width, missing window type</td><td>Blocks submission, cannot be missing</td></tr>
+  <tr><td><strong>Warn + confirm</strong></td><td>Width entered as 5"</td><td>Flagged live as the tech types; corrected, or explicitly confirmed (override)</td></tr>
+  <tr><td><strong>Nudge, not block</strong></td><td>No photo or notes</td><td>One-time, non-blocking prompt before submit, forcing uploads mid-visit isn't worth the friction</td></tr>
 </table>
 <p>A technician can also flag any window "not confident," routing it into
-the manager's exception queue directly — for the cases no algorithm
-catches.</p>
+the manager's exception queue directly (for the cases no algorithm catches).</p>
+
 
 <h3>Tech Stack</h3>
 <p><strong>Prototype stack</strong>: optimized for speed and demonstrating behavior.
 <strong>Production stack</strong>: selected after discovering ABC's identity, device
 environment, ERP, accounting, connectivity, security, and integration
 constraints.</p>
-<p>What doesn't change regardless of which client this is: a shared backend
-is not optional — a client-only app can't make the tech→manager→billing
-handoff exist at all. Concretely: mobile-first PWA for capture (no
-app-store step, offline-capable); same app, desktop-responsive, for the
-manager; a backend API owning the source of truth; a real relational
-database (the prototype's flat JSON files are a demo shortcut, not a
-production plan); object storage for photos; and an API/webhook layer
-into ABC's existing ERP — an integration point, not a replacement.</p>
+<p>
+What doesn't change regardless of which client this is:
+A shared backend is not optional — a client-only app can't make the tech→manager→billing handoff exist at all.
+
+Concretely: mobile-first PWA for capture (no app-store step, offline-capable);
+Same app, desktop-responsive, for the manager; 
+A backend API owning the source of truth; a real relational database (the prototype's flat JSON files are a demo shortcut, not a
+production plan); 
+Object storage for photos; and an API/webhook layer into ABC's existing ERP, an integration point, not a replacement.</p>
+
 <p>Vendor choices (cloud, database, auth provider) should follow ABC's
 existing stack. Absent that information, the default is Node/Express +
 React + Postgres — boring, well-supported, not a locked-in recommendation.</p>
@@ -214,40 +224,86 @@ non-blocking nudge, manager review screen, clarification request,
 approval and structured downstream handoff, timestamped audit trail.</p>
 <p><strong>MVP+ (explicitly deferred):</strong></p>
 <ul>
-  <li>Offline-first PWA sync, and CV-assisted measurement from photos
-  (shown <em>alongside</em> manual entry as a cross-check, not a replacement —
-  needs a calibration reference in-frame to be accurate) — both
-  general technical patterns, ready to design without more input from ABC.</li>
-  <li>Voice notes converted to structured notes, fully autonomous approval,
-  and inventory optimization — depend on decisions or systems that belong
-  to ABC (see Open Questions), not on build time.</li>
+  <li><strong>Offline sync</strong>: job sites often have poor signal; a
+  well-understood technical pattern, not dependent on ABC's specifics.</li>
+  <li><strong>Autonomous approval</strong>: skip the manager click for
+  flag-free submissions: a risk-tolerance and policy decision for ABC,
+  not a technical one.</li>
+  <li><strong>Manager dashboard search/filtering</strong>:v2 polish</li>
 </ul>
 
-<h3>Configurability</h3>
-<table>
-  <tr><th>Principle</th><th>Status</th></tr>
-  <tr><td>Selecting a job loads its known info</td><td><span class="check">✅ Built</span></td></tr>
-  <tr><td>Window type changes the required checklist</td><td><span class="cross">❌ Not built</span> — one fixed checklist today</td></tr>
-  <tr><td>Different rules attached to different fields</td><td><span class="check">✅ Built</span>, but hardcoded, not configurable per job</td></tr>
-  <tr><td>Required vs. suspicious info behave differently</td><td><span class="check">✅ Built</span> — the validation model above</td></tr>
-</table>
-<p>The real gap: checklist rules should vary by <em>both</em> job type and window
-type, not use one default set. The architecture already supports this
-(job metadata already flows into the form) — an extension, not a redesign.</p>
+<h3>Job Intake & Where AI Helps</h3>
+<p>Everything above starts from "job assigned," but how does a job get
+there? Today, that's manual: someone takes a call or an order and types
+customer, address, and job details into whatever system ABC already
+runs. This prototype doesn't touch that step — <code>mockJobs.json</code>
+stands in for it. But the same principle driving the rest of this
+proposal applies here too: intake shouldn't be the one unstructured step
+in an otherwise structured pipeline. Job creation should follow its own
+guided checklist: customer, address, job type, special requirements.
+Window type changing the required measurement checklist is the same idea one level
+down: not built here, but the architecture already supports it (job
+metadata already flows into the form), so it's an extension, not a
+redesign.</p>
+
+<p>That's also, deliberately, where AI belongs in this proposal. The problems named in the case (forgotten fields, illegible
+notes, second trips, manual re-entry) are a workflow and software design
+problem, not an AI problem — structured capture and live validation solve
+them without any AI at all. Intake is different: it's the one step here
+that starts from unstructured human input, which is exactly the kind of
+translation task AI is actually good at.</p>
+
+<p>Specifically:</p>
+<ul>
+  <li><strong>AI-assisted intake</strong>: extract structured job metadata (customer, address, job type) from an unstructured order: a call transcript, an email, instead of someone re-typing it by hand, and auto-select the right measurement checklist based on job type.</li>
+  <li><strong>Computer vision assisted measurement cross-check</strong>: shown alongside manual entry as a second opinion, not a replacement for the tape measure. flagged if the two disagree.</li>
+  <li><strong>Smarter anomaly ranges over time</strong>: today's plausible-range validation (6"–120", etc.) is a reasonable but static guess. Once real order history exists, those ranges could be learned per window type or region instead of hardcoded.</li>
+  <li><strong>Voice-to-structured-notes</strong>: lower priority, genuinely nice-to-have — converting a spoken field note into structured text.</li>
+  <li><strong>AI-drafted clarification notes</strong>: when a manager flags a submission, an LLM drafts a starting note from the flags themselves ("width looks unusually narrow for a Bay/Bow window: confirm?") for the manager to edit or send, instead of typing one from scratch every time.</li>
+</ul>
+
+<p>None of this is built here, and that's deliberate — each needs either
+ABC's real intake process or real usage data to design well. Proposing
+it without that would be guessing dressed up as automation.</p>
+
+<h3>Adoption & Rollout</h3>
+<p>None of this works if technicians don't trust it. A crew that's
+measured windows with a tape and a notepad for years won't switch because
+the software is elegant — they'll switch because it's obviously faster
+and doesn't get them blamed for someone else's mistake.</p>
+<ul>
+  <li><strong>Pilot with 2–3 technicians first:</strong>not a full
+  rollout, this validates the workflow against real job-site conditions
+  (signal, glare on a phone screen, gloves) before scaling, and produces
+  real baseline numbers for the metrics below instead of guessed ones.</li>
+  <li><strong>Keep the UI boring on purpose:</strong> minimal required fields, no jargon, nothing that
+  needs a training manual to submit a job.</li>
+  <li><strong>A fallback for when the app fails mid-visit:</strong> No
+  offline sync in the prototype yet (see MVP+), until it exists, pilot
+  technicians need a plain paper backup, not a dead end.</li>
+  <li><strong>The manager's role changes as much as the technician's:</strong>
+  from checking every field to reviewing exceptions. That's a bigger
+  behavioral shift than it sounds like, and it's worth getting their
+  buy-in before day one, not after.</li>
+</ul>
 
 <h3>What I Decided vs. What I Left Open</h3>
-<p><strong>Decided:</strong> manager approval is always required, flagged or not — whether
+<p><strong>Decided:</strong> manager approval is always required, flagged or not. Whether
 a clean submission could someday skip that step is ABC's call, not
-assumed here. No authentication in the prototype — a real gap, named
-rather than hidden.</p>
-<p><strong>Left open, for discovery with ABC:</strong></p>
+assumed here. No authentication in the prototype, and no push
+notifications either. A technician only sees a clarification request by
+opening the app and checking. Both are real gaps for a live rollout,
+named rather than hidden.</p>
+<p><strong>Left open, for discovery with ABC</strong> (ranked by how much
+the rest of this proposal depends on the answer):</p>
 <ul>
-  <li>What measurement fields are required today, and do they differ by window type or job type?</li>
-  <li>What system receives the production/inventory/billing order today — does it expose an API, or is it re-keyed by hand?</li>
-  <li>What devices do technicians carry, and what's typical site connectivity?</li>
-  <li>What's the current second-trip rate, and what does one actually cost?</li>
-  <li>Who should be able to override a flagged measurement — tech, manager, or both?</li>
-  <li>What are ABC's real authentication and security requirements for a field crew?</li>
+  <li><strong>Downstream system</strong>: what receives the production/inventory/billing order today — does it expose an API, or is it re-entered by hand?</li>
+  <li><strong>Measurement fields</strong>: what's required today, and does it differ by window type or job type?</li>
+  <li><strong>Second-trip cost</strong>: what's the current rate?</li>
+  <li><strong>Devices & connectivity</strong>: what do technicians carry, and what's typical site signal?</li>
+  <li><strong>Override authority</strong>: should tech, manager, or both be able to override a flagged measurement?</li>
+  <li><strong>Clarification specificity</strong>: should a request point to one specific field, or is a free-text note enough and does it always mean a data fix, or sometimes an actual site revisit? </li>
+  <li><strong>Auth & security</strong>: what does ABC actually require for a field crew?</li>
 </ul>
 
 <h3>Success Metrics</h3>
@@ -255,23 +311,30 @@ rather than hidden.</p>
 administrative time per job, manager review time per job, first-pass
 completeness rate, percentage of jobs requiring clarification, repeat
 site-visit rate, time from site visit to approval, manual data-entry
-time, production errors caused by incorrect measurements.</p>
+time</p>
 <p>Illustrative targets, clearly labeled as hypotheses:</p>
 <ul>
-  <li>Reduce technician transcription from 20 minutes to under 2 minutes</li>
+  <li>Reduce technician transcription from 20 minutes to under 2 minutes — literally the 10x this case asks for</li>
   <li>Raise first-pass completeness above 95%</li>
   <li>Reduce approval latency from the following day to minutes</li>
   <li>Reduce measurement-related repeat visits by 70–80%</li>
 </ul>
 
-<h3>What's Real vs. Mocked</h3>
-<table>
-  <tr><th></th><th>Real</th><th>Mocked</th></tr>
-  <tr><td>Capture form, validation, exception queue, clarification loop</td><td class="check">✅</td><td></td></tr>
-  <tr><td>Approve → downstream handoff</td><td class="check">✅ (structured payload)</td><td>Destination is a mock queue, not ABC's real ERP</td></tr>
-  <tr><td>Job metadata</td><td></td><td>Stands in for ABC's scheduling/CRM</td></tr>
-  <tr><td>Storage</td><td></td><td>Flat files here — a real deployment uses a database</td></tr>
-</table>
+<p>For the common case: no second trip needed, because bad data was
+caught at capture. The full cycle time from site visit to billing-ready
+collapses from same-day-or-later (transcription, manager review latency,
+billing re-entry) down to minutes — the exact multiple depends on ABC's
+current review turnaround.</p>
+
+<p>Turning this into a dollar figure just needs ABC's real inputs, job
+volume, loaded technician/admin cost, current second-trip rate. The
+formula stays constant regardless of what those numbers turn out to be:</p>
+
+<div class="diagram">Hours saved = second-trip hours avoided + data-entry hours avoided
+ROI = (hours saved &times; hourly cost) &minus; cost to build
+      (compare both over the same period, e.g. per year)</div>
+
+<p class="hook" style="font-size: 10.5pt; font-weight: 500; margin-top: 24px;">The prototype proves the idea works. The open questions above are where I'd start the real conversation.</p>
 
 </body>
 </html>
