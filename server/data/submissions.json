@@ -1,1 +1,83 @@
-[]
+[
+  {
+    "id": "261be117-9b8c-4a9a-be02-8326eeec1873",
+    "jobId": "JOB-1042",
+    "customerName": "Marcus Feld",
+    "siteAddress": "214 Birchwood Ln, Nashua, NH",
+    "techName": "Dana Ruiz",
+    "submittedAt": "2026-08-19T17:43:46.773Z",
+    "windows": [
+      {
+        "id": "cc00cb85-40c4-4cb8-b288-80c35f47b431",
+        "location": "Living room",
+        "widthIn": 8,
+        "heightIn": 10,
+        "depthIn": 3,
+        "windowType": "Awning",
+        "facingDirection": "South",
+        "quantity": 1,
+        "notes": "",
+        "photos": [],
+        "uncertain": true,
+        "uncertainNote": "dsfsdkjfh lkjdshfloafn sdhfaewf",
+        "rangeConfirmed": false
+      },
+      {
+        "id": "b8654412-a1c4-45ed-aa57-c5d9c41b93dd",
+        "location": "room",
+        "widthIn": 6,
+        "heightIn": 8,
+        "depthIn": 1,
+        "windowType": "Picture",
+        "facingDirection": "South",
+        "quantity": 1,
+        "notes": "",
+        "photos": [],
+        "uncertain": false,
+        "uncertainNote": "",
+        "rangeConfirmed": false
+      }
+    ],
+    "flags": [
+      "Window 1: technician flagged this measurement as unsure — \"dsfsdkjfh lkjdshfloafn sdhfaewf\""
+    ],
+    "status": "sent_to_billing",
+    "clarificationHistory": [
+      {
+        "note": "Clarify bluh bluh",
+        "requestedAt": "2026-08-19T17:44:27.035Z"
+      }
+    ],
+    "resubmittedAt": "2026-08-19T17:44:49.428Z",
+    "approvedAt": "2026-08-19T17:45:00.737Z"
+  },
+  {
+    "id": "fc23e72a-c3d1-4347-a3cc-038b4053fcf8",
+    "jobId": "JOB-1042",
+    "customerName": "Marcus Feld",
+    "siteAddress": "214 Birchwood Ln, Nashua, NH",
+    "techName": "Dana Ruiz",
+    "submittedAt": "2026-08-19T17:42:23.664Z",
+    "windows": [
+      {
+        "id": "d570bcf5-dc33-4877-b101-3d81b3c4c978",
+        "location": "Room",
+        "widthIn": 9,
+        "heightIn": 8,
+        "depthIn": 3,
+        "windowType": "Casement",
+        "facingDirection": "South",
+        "quantity": 1,
+        "notes": "",
+        "photos": [],
+        "uncertain": false,
+        "uncertainNote": "",
+        "rangeConfirmed": false
+      }
+    ],
+    "flags": [],
+    "status": "sent_to_billing",
+    "clarificationHistory": [],
+    "approvedAt": "2026-08-19T17:45:03.976Z"
+  }
+]
